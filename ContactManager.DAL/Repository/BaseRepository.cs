@@ -18,7 +18,7 @@ namespace ContactManager.DAL.Repository
             _db = new ContactManagerContext();
             _table = _db.Set<T>();
         }
-        public int Add(T entity)
+        public virtual int Add(T entity)
         {
             _db.Entry(entity).State = EntityState.Added;
             return SaveChanges();
@@ -40,34 +40,14 @@ namespace ContactManager.DAL.Repository
 
         public T GetOne(int? id) => _table.Find(id);
 
-        public int Save(T entity)
+        public virtual int Save(T entity)
         {
             _db.Entry(entity).State = EntityState.Modified;
             return SaveChanges();
         }
         internal int SaveChanges()
         {
-            try
-            {
-                return _db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw;
-            }
-            catch (DbUpdateException ex)
-            {
-                throw;
-            }
-            catch (CommitFailedException ex)
-            {
-
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return _db.SaveChanges();   
         }
     }
 }

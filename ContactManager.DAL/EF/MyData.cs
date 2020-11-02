@@ -17,6 +17,7 @@ namespace ContactManager.DAL.EF
             };
             people.ForEach(x => context.People.AddOrUpdate(
                 c => new { c.DateofBirth, c.Married, c.Phone, c.Salary }, x));
+
         }
     }
 }
