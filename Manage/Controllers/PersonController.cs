@@ -1,10 +1,8 @@
-﻿using ContactManager.DAL.Repository;
+﻿using AutoMapper;
+using ContactManager.DAL.Repository;
 using ContactManager.Models;
-using System;
+using ContactManager.Models.DTO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Manage.Controllers
@@ -13,18 +11,22 @@ namespace Manage.Controllers
     public class PersonController : ApiController
     {
         private readonly IRepository<Person> _repository;
+        private readonly IMapper _mapper;
         public PersonController()
         {
 
         }
-        public PersonController(IRepository<Person> repository)
+        public PersonController(IRepository<Person> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         [HttpGet, Route("")]
         public IHttpActionResult GetList()
         {
-            return Ok(_repository.GetAll());
+            var people = _repository.GetAll();
+            return Ok(_mapper.Map<List<PersonDTO>>(people));
+
         }
     }
 }
