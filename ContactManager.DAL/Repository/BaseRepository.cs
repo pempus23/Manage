@@ -18,7 +18,7 @@ namespace ContactManager.DAL.Repository
             _db = new ContactManagerContext();
             _table = _db.Set<T>();
         }
-        public int Add(T entity)
+        public virtual int Add(T entity)
         {
             _db.Entry(entity).State = EntityState.Added;
             return SaveChanges();

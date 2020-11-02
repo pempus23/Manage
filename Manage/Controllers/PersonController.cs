@@ -54,32 +54,16 @@ namespace Manage.Controllers
         [ResponseType(typeof(Person))]
         public IHttpActionResult PostInventory(Person item)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
+           
                 _repository.Add(item);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+           
             return CreatedAtRoute("DisplayRoute", new { id = item.Id }, item);
         }
         [HttpDelete, Route("{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult Delete(int id)
         {
-            try
-            {
-                _repository.Delete(id);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            _repository.Delete(id);
             return Ok();
         }
         [HttpPut, Route("{id}")]
