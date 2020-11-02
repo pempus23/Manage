@@ -12,7 +12,7 @@ namespace Manage.Infrastructure
     {
         private readonly IKernel kernel;
 
-        public NinjectResolver() : this(new StandardKernel())
+        public NinjectResolver() : this(new StandardKernel(new MapperModule()))
         {
         }
 
