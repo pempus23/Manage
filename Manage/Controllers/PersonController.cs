@@ -70,10 +70,7 @@ namespace Manage.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutChange(int id, Person item)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+          
             if (id != item.Id)
             {
                 return BadRequest();

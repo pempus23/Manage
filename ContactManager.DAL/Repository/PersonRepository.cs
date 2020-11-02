@@ -19,5 +19,11 @@ namespace ContactManager.DAL.Repository
             Context.Entry(entity).State = EntityState.Added;
             return SaveChanges();
         }
+        public override int Save(Person entity)
+        {
+            entity.DateofBirth = DateTime.Now;
+            Context.Entry(entity).State = EntityState.Modified;
+            return SaveChanges();
+        }
     }
 }
